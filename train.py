@@ -36,7 +36,7 @@ def run_training_loop(env, agent, agent_type, agent_action_repeated, replay_buff
                 action = agent.sample_action(observation)
 
         if train_step >= init_train_steps:
-            experience_tuple = replay_buffer.sample_proprio() if agent_type == 'sac' else replay_buffer.sample_cpc()
+            experience_tuple = replay_buffer.sample_proprio() if agent_type == 'sac' or agent_type == 'sacae' else replay_buffer.sample_cpc()
             agent.update(*experience_tuple, env_step=env_step, train_step=train_step, logger=L)
 
         next_observation, reward, done, _ = env.step(action)

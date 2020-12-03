@@ -38,8 +38,8 @@ def main():
         seed=args.seed,
         visualize_reward=False,
         from_pixels=False if args.agent == 'sac' else True,
-        height=args.pre_transform_image_size,
-        width=args.pre_transform_image_size,
+        height=args.pre_transform_image_size if args.agent != 'sacae' else args.image_size,
+        width=args.pre_transform_image_size if args.agent != 'sacae' else args.image_size,
         frame_skip=args.action_repeat
     )
     env.seed(args.seed)
@@ -49,9 +49,12 @@ def main():
         env = FrameStack(env, k=args.frame_stack)
 
     action_shape = env.action_space.shape
-    if args.agent != 'sac':
+    if args.agent == 'curl_sac':
         obs_shape = (3*args.frame_stack, args.image_size, args.image_size)
-        pre_aug_obs_shape = (3*args.frame_stack,args.pre_transform_image_size,args.pre_transform_image_size)
+        pre_aug_obs_shape = (3*args.frame_stack,args.pre_transform_image_size, args.pre_transform_image_size)
+    elif args.agent == 'sacae':
+        pre_aug_obs_shape = env.observation_space.shape
+        obs_shape = pre_aug_obs_shape
     else:
         obs_shape = env.observation_space.shape
         pre_aug_obs_shape = obs_shape

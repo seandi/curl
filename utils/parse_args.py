@@ -14,13 +14,13 @@ def parse_args():
     # replay buffer
     parser.add_argument('--replay_buffer_capacity', default=10000, type=int)
     # train
-    parser.add_argument('--agent', default='curl_sac', type=str)
+    parser.add_argument('--agent', default='sac', type=str)
     parser.add_argument('--init_train_steps', default=1000, type=int)
-    parser.add_argument('--env_steps_training', default=100000, type=int)
+    parser.add_argument('--env_steps_training', default=500000, type=int)
     parser.add_argument('--batch_size', default=256, type=int)
     parser.add_argument('--hidden_dim', default=1024, type=int)
     # eval
-    parser.add_argument('--eval_every_n_env_steps', default=10000, type=int)
+    parser.add_argument('--eval_every_n_env_steps', default=25000, type=int)
     parser.add_argument('--num_eval_episodes', default=10, type=int)
     # critic
     parser.add_argument('--critic_lr', default=1e-3, type=float)
@@ -54,7 +54,7 @@ def parse_args():
     parser.add_argument('--save_model', default=False, action='store_true')
     parser.add_argument('--detach_encoder', default=False, action='store_true')
 
-    parser.add_argument('--backup_every_n_episodes', default=80, type=int)
+    parser.add_argument('--backup_every_n_episodes', default=100, type=int)
 
     parser.add_argument('--log_every_n_train_steps', default=1, type=int)
     args = parser.parse_args()

@@ -30,6 +30,7 @@ def run_evaluation(env, agent, model, n_episodes,
 
     PREPROCESS_OBSERVATION_TECHNIQUE = {
         'sac': lambda x: x,
+        'sacae': lambda x: x,
         'curl_sac': lambda obs: center_crop_image(obs, crop_size)
     }
 
