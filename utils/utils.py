@@ -21,11 +21,11 @@ def make_dir(dir_path):
     return dir_path
 
 
-def make_log_directory(domain, task, seed, agent_name, work_dir):
+def make_log_directory(domain, task, seed, agent_name, batch_size,  work_dir):
     ts = time.gmtime()
     ts = time.strftime("%m-%d-%H-%M", ts)
     env_name = domain + '-' + task + '-' + agent_name
-    exp_name = env_name + '-' + ts + '-s' + str(seed)
+    exp_name = env_name + '-' + ts + '-b' + str(batch_size) + '-s' + str(seed)
     result_dir = work_dir + '/' + exp_name
 
     make_dir(result_dir)

@@ -23,6 +23,9 @@ def make_agent(obs_shape, action_shape, args, device):
             critic_beta=args.critic_beta,
             critic_tau=args.critic_tau,
             critic_target_update_every_n_train_steps=args.critic_target_update_every_n_train_steps,
+            actor_encoder=None,
+            critic_encoder=None,
+            critic_target_encoder=None,
             encoder_tau=args.encoder_tau,
             detach_encoder=args.detach_encoder,
             log_every_n_train_steps=args.log_every_n_train_steps
@@ -53,7 +56,8 @@ def make_agent(obs_shape, action_shape, args, device):
             encoder_num_filters=args.num_filters,
             log_every_n_train_steps=args.log_every_n_train_steps,
             detach_encoder=args.detach_encoder,
-            curl_latent_dim=args.curl_latent_dim
+            curl_latent_dim=args.curl_latent_dim,
+            cpc_update_every_n_train_steps=args.cpc_update_every_n_train_steps
         )
     elif args.agent == 'sacae':
         return SACAEAgent(
@@ -74,8 +78,16 @@ def make_agent(obs_shape, action_shape, args, device):
             critic_beta=args.critic_beta,
             critic_tau=args.critic_tau,
             critic_target_update_every_n_train_steps=args.critic_target_update_every_n_train_steps,
+            encoder_num_layers=args.num_layers,
+            encoder_num_filters=args.num_filters,
+            encoder_latent_dim=args.encoder_feature_dim,
+            encoder_lr=args.encoder_lr,
             encoder_tau=args.encoder_tau,
             detach_encoder=args.detach_encoder,
+            decoder_lr=args.decoder_lr,
+            decoder_update_every_n_train_steps=args.decoder_update_every_n_train_steps,
+            decoder_latent_lambda=args.decoder_latent_lambda,
+            decoder_weight_lambda=args.decoder_weight_lambda,
             log_every_n_train_steps=args.log_every_n_train_steps
         )
     else:

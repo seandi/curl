@@ -12,10 +12,12 @@ from agents.make_agent import make_agent
 from replay_buffer import ReplayBuffer
 
 
+
+
 def main():
     args = parse_args()
     if args.seed == -1:
-        args.__dict__["seed"] = np.random.randint(1,1000000)
+        args.__dict__["seed"] = np.random.randint(1, 1000000)
     set_seed_everywhere(args.seed)
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -25,6 +27,7 @@ def main():
         domain=args.domain_name,
         task=args.task_name,
         seed=args.seed,
+        batch_size=args.batch_size,
         agent_name=args.agent,
         work_dir=args.work_dir
     )
